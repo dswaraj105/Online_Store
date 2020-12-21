@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const indexRoutes = require('./routes/index');
 const shopRoutes = require('./routes/shop');
+const cartRoutes = require('./routes/cart_orders');
 
 const app = express();
 
@@ -16,8 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(indexRoutes);
 app.use(shopRoutes);
-// app.get('/dslr', (req, res)  => {
-//   res.render('dslr')
-// });
+app.use(cartRoutes);
 
 app.listen(3000);
