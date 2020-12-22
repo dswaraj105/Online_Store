@@ -12,6 +12,8 @@
     <!-- css styles -->
     <link href="/css/style.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="/css/products.css"> -->
+    <!-- my scripts -->
+    <script src="js/products.js" defer></script>
   </head>
   <body>
     <!-- Navigation -->
@@ -34,8 +36,8 @@
                 <div class="card-body">
                     <p class="card-title"><%= p.NAME %>></p>
                     <p class="card-text">Price: ₹<%= p.PRICE %></p> 
-                    <a href="#" data-id=<%= p.PRODUCT_ID %> class="btn btn-outline-secondary">Buy Now</a>
-                    <a href="#" class="btn btn-outline-secondary">Add to Cart</a>
+                    <a href="#" data-id='<%= p.PRODUCT_ID %>' class="btn btn-outline-secondary buy-now">Buy Now</a>
+                    <a href="#" data-id='<%= p.PRODUCT_ID %>' class="btn btn-outline-secondary add-to-cart">Add to Cart</a>
                 </div>
               </div>
             </div>
