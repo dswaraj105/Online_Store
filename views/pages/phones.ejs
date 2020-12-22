@@ -1,98 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Complete Bootstrap 4 Website Layout</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-	<link href="/css/style.css" rel="stylesheet">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RAGE</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" defer></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" defer></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" defer></script>
+    <!-- css styles -->
+    <link href="/css/style.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="/css/products.css"> -->
+  </head>
+  <body>
+    <!-- Navigation -->
+    <%- include('../includes/navigation') %>
 
-<!-- Navigation -->
-<%- include('../includes/navigation') %>
+    <!-- a card for attraction -->
+    <%- include('../includes/attractioncard') %>
 
-<!--- Cards -->
-<div class="container-fluid padding">
-    <div class="row padding">
-        <div class="col-md-4">
-            <div class="card card-product">
-                <img class="card-img-top" src="../img/phone1.jpg">
+    <!-- displaying card of products -->
+    <div class="container">
+      <div class="product-cards row">
+        <% if(products.length === 0) { %>
+          <h1>No Products Available Now</h1>
+          <h3>Please try agail Later</h3>
+        <% }else{ %>
+          <% products.forEach((p) => { %>
+            <div class="col-md-4">
+              <div class="card card-product mx-auto" style="width: 300px;">
+                <img class="card-img-top prod-img mx-auto" src="../img/phone<%= p.PRODUCT_ID %>.jpg">
                 <div class="card-body">
-                    <h4 class="card-title">New Apple iPhone 12 (64GB) - Green</h4>
-                    <h5 class="card-text">Price: ₹79,899.00</h5> 
-                    <a href="#" class="btn btn-outline-secondary">Buy Now</a>
+                    <p class="card-title"><%= p.NAME %>></p>
+                    <p class="card-text">Price: ₹<%= p.PRICE %></p> 
+                    <a href="#" data-id=<%= p.PRODUCT_ID %> class="btn btn-outline-secondary">Buy Now</a>
                     <a href="#" class="btn btn-outline-secondary">Add to Cart</a>
                 </div>
+              </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card card-product">
-                <img class="card-img-top" src="../img/phone2.jpg">
-                <div class="card-body">
-                    <h4 class="card-title">Samsung Galaxy S20 + (Cosmic Black, 8GB RAM, 128GB Storage)</h4>
-                    <h5 class="card-text">Price: ₹ 69,990.00</h5>
-                    <a href="#" class="btn btn-outline-secondary">Buy Now</a>
-                    <a href="#" class="btn btn-outline-secondary">Add to Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 card-product">
-            <div class="card">
-                <img class="card-img-top" src="../img/phone3.jpg">
-                <div class="card-body">
-                    <h4 class="card-title">OnePlus 8T 5G (Aquamarine Green, 8GB RAM, 128GB Storage)</h4>
-                    <h5 class="card-text">Price: ₹42,999.00</h5>
-                    <a href="#" class="btn btn-outline-secondary">Buy Now</a>
-                    <a href="#" class="btn btn-outline-secondary">Add to Cart</a>
-                </div>
-            </div>
-        </div>
+          <% }) %>
+        <% } %>   
+      </div>
     </div>
-    </div> 
-    <div class="container-fluid padding">
-        <div class="row padding">
-            <div class="col-md-4">
-                <div class="card card-product">
-                    <img class="card-img-top" src="../img/phone4.jpg">
-                    <div class="card-body">
-                        <h4 class="card-title">Google Pixel 5 5G 128GB - Just Black</h4>
-                        <h5 class="card-text">Price: ₹75,900.00</h5> 
-                        <a href="#" class="btn btn-outline-secondary">Buy Now</a>
-                        <a href="#" class="btn btn-outline-secondary">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-product">
-                    <img class="card-img-top" src="../img/phone6.jpg">
-                    <div class="card-body">
-                        <h4 class="card-title">OPPO F17 Pro (Matte Gold, 8GB RAM, 128GB Storage) Gift Box Edition</h4>
-                        <h5 class="card-text">Price: ₹ 23,990.00</h5>
-                        <a href="#" class="btn btn-outline-secondary">Buy Now</a>
-                        <a href="#" class="btn btn-outline-secondary">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-product">
-                    <img class="card-img-top" src="../img/phone5.jpg">
-                    <div class="card-body">
-                        <h4 class="card-title">Apple iPhone 11 Pro (512GB) - Space Grey</h4>
-                        <h5 class="card-text">Price: ₹1,09,999.00</h5>
-                        <a href="#" class="btn btn-outline-secondary">Buy Now</a>
-                        <a href="#" class="btn btn-outline-secondary">Add to Cart</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>  
-<!--- Footer -->
-<%- include('../includes/footer') %>
 
+    <!--- Footer -->
+    <%- include('../includes/footer') %>
   </body>
 </html>

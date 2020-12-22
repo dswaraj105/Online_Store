@@ -30,8 +30,8 @@
 // cameras.forEach((cam, index) => {
 //   const rannum = Math.ceil(Math.random()*10+5);
 //   let id = index + 22;
-//   // console.log(index+1, phone.price, rannum, 'mobile', phone.name);
-//   db.execute('INSERT INTO product VALUES(?,?,?,?,?)', [cam.name, id, cam.price, rannum, 'mobile'])
+//   // console.log(index+1, phone.price, rannum, 'camera', phone.name);
+//   db.execute('INSERT INTO product VALUES(?,?,?,?,?)', [cam.name, id, cam.price, rannum, 'camera'])
 //     .then(() => {
 //       console.log('Inserted');
 //     })

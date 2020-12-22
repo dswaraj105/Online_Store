@@ -182,8 +182,31 @@ hr.light-100 {
 
 
                                 /* styling for pages */
+.product-cards{
+  margin-bottom: 20px;
+}
 .card-product{
-  height: 600px;
+  height: 450px;
+  width: 250px;
+  padding-bottom: 5px;
+}
+
+.card-product-camera{
+  height: 500px;
+}
+
+.prod-img{
+  height: 250px;
+  max-width: 250px;
+}
+
+.card-title{
+  /* font-weight: bold; */
+  font-size: 1.1rem;
+}
+
+.card-product .card-body{
+  background-color: 31595E;
 }
 
                                               /*---Media Queries --*/
