@@ -1,6 +1,7 @@
 const form = document.getElementById('form');
 const username = document.getElementById('username');
 const email = document.getElementById('email');
+const phone = document.getElementById('phone');
 const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
 
@@ -81,7 +82,7 @@ function getFieldName(input) {
 form.addEventListener('submit', function(e) {
   e.preventDefault();
 
-  let x1 = checkRequired([username, email, password, password2]);
+  let x1 = checkRequired([username, email, phone, password, password2]);
   let x2 = checkLength(username, 3, 15);
   let x3 = checkLength(password, 6, 25);
   let x4 = checkEmail(email);

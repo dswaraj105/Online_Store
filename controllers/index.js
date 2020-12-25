@@ -12,8 +12,9 @@ exports.postRegister = async (req, res, next) => {
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
-  // console.log(name, email, password);
-  let result = await userdb.registerUser(name, email, password);
-  console.log(result);
+  const phone = req.body.phone;
+  
+  await userdb.registerUser(name, email, password, phone);
+  
   res.redirect('/');
 }
