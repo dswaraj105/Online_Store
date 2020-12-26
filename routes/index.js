@@ -8,6 +8,14 @@ router.get('/', indexController.getIndex);
 
 router.get('/signup', indexController.getSignup);
 
-router.post('/register', indexController.postRegister);
+router.post('/signup', indexController.postSignup);
+
+router.get('/signup/address', indexController.getAddress);
+
+router.post('/signup/address', indexController.postAddress);
+
+router.get('/login', indexController.getLogin);
+
+router.post('/login', indexController.postLogin);
 
 module.exports = router;

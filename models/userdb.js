@@ -11,4 +11,20 @@ exports.registerUser = async (name, email, password, phone) => {
   await db.execute('INSERT INTO login VALUES(?,?)', [email, password]);
 }
 
+exports.updateUserAddress = (email, state, city, pincode, houseno) => {
+  db.execute(`
+    UPDATE CUSTOMER 
+    SET STATE=?, CITY=?, PINCODE=?, HOUSE_NO=?
+    WHERE EMAIL=?
+    `, [state, city, pincode, houseno, email]);
+}
 
+exports.validateLogin = async (email, password) => {
+  const actualpassword = await db.execute('SELECT PASSWORD FROM LOGIN WHERE CUSTOMER_EMAIL=?', [email]);
+  const pdb = actualpassword[0][0].PASSWORD;
+  if(password == pdb){
+    return true;
+  } else {
+    return false;
+  }
+}

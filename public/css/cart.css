@@ -1,0 +1,52 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+h1{
+  text-align: center;
+  color: aliceblue;
+}
+
+.container{
+  text-align: center;
+}
+
+.cart-item{
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  font-size: 1.2rem;
+  align-items: center;
+}
+
+.cart-item:nth-child(odd){
+  background-color: #435343;
+}
+
+.cart-item:nth-child(even) {
+  background-color: #444444;
+}
+
+.number{
+  text-align: left;
+  width: 50px;
+}
+
+.product-name{
+  text-align: left;
+  width: 600px;
+}
+
+.price{
+  width: 150px;
+}
+
+.btn{
+  margin: 0 10px;
+}
+
+.btn-success{
+  margin: auto;
+}
