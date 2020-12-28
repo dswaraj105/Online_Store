@@ -1,10 +1,25 @@
-const shopdb = require('../models/shop');
+const e = require('express');
+const shopdb = require('../models/shopdb');
+const loginHandler = require('../util/loginHandler');
+
+function getUser (){
+  const email = loginHandler.getUserEmail();
+  let name = '';
+  if(email){
+    name = email.split('@')[0];
+  }
+  return [name, email];
+}
 
 exports.getPhones = (req, res, next) => {
+  const [name, email] = getUser();
+
   shopdb.getProducts('mobile')
     .then(([products]) => {
       res.render('pages/phones',{
-        products : products
+        products : products,
+        name : name,
+        email: email
       });
     })
     .catch((err) => {
@@ -14,10 +29,14 @@ exports.getPhones = (req, res, next) => {
 };
 
 exports.getLaptop = (req, res, next) => {
+  const [name, email] = getUser();
+
   shopdb.getProducts('laptop')
     .then(([products]) => {
       res.render('pages/laptop',{
-        products : products
+        products : products,
+        name : name,
+        email: email
       });
     })
     .catch((err) => {
@@ -27,10 +46,14 @@ exports.getLaptop = (req, res, next) => {
 };
 
 exports.getDslr = (req, res, next) => {
+  const [name, email] = getUser();
+
   shopdb.getProducts('camera')
     .then(([products]) => {
       res.render('pages/dslr',{
-        products : products
+        products : products,
+        name : name,
+        email: email
       });
     })
     .catch((err) => {
@@ -38,3 +61,17 @@ exports.getDslr = (req, res, next) => {
       res.render(error);
     });
 };
+
+exports.buynow = (req, res, next) => {
+  const id = req.body.id;
+  const email = req.body.email;
+  console.log(id, '--added to buy now', email);
+  res.json({message: 'ok'});
+}
+
+exports.addtocart = (req, res, next) => {
+  const id = req.body.id;
+  const email = req.body.email;
+  console.log(id, '--added to cart', email);
+  res.json({message: 'ok'});
+}

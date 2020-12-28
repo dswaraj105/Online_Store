@@ -209,6 +209,29 @@ hr.light-100 {
   background-color: 31595E;
 }
 
+/* ERROR STYLES */
+.error-login{
+  background: #F00000;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #DC281E, #F00000);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #DC281E, #F00000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  margin: 15px;
+  text-align: center;
+  padding: 25px 15px 15px 15px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.fa-times{
+  position: absolute;
+  top: 10px;
+  right: 25px;
+}
+
+.hide{
+  display: none;
+}
+
                                               /*---Media Queries --*/
 
 @media (max-width: 992px) {

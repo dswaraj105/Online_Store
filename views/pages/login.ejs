@@ -17,7 +17,7 @@
       <% if(loginFailed) { %>
         <div class="error-login">
           <i class="fas fa-times"></i>
-          SORRY WRONG PASSWORD
+          <%= errorMessage %>
         </div>
       <% } %>
       <% if(login) { %>
