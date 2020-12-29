@@ -1,4 +1,4 @@
-const e = require('express');
+
 const shopdb = require('../models/shopdb');
 const loginHandler = require('../util/loginHandler');
 
@@ -62,16 +62,28 @@ exports.getDslr = (req, res, next) => {
     });
 };
 
-exports.buynow = (req, res, next) => {
+exports.buynow = async (req, res, next) => {
   const id = req.body.id;
   const email = req.body.email;
-  console.log(id, '--added to buy now', email);
-  res.json({message: 'ok'});
+  const response = await shopdb.buyNow(email, id);
+  let message = '';
+  if(response){
+    message = 'all done'
+  } else {
+    message = 'it exists'
+  }
+  res.json({message: message});
 }
 
-exports.addtocart = (req, res, next) => {
+exports.addtocart = async (req, res, next) => {
   const id = req.body.id;
   const email = req.body.email;
-  console.log(id, '--added to cart', email);
-  res.json({message: 'ok'});
+  const response = await shopdb.addTOCart(email, id);
+  let message = '';
+  if(! response){
+    message = 'item exsits'
+  } else {
+    message = 'all good'
+  }
+  res.json({message: message});
 }

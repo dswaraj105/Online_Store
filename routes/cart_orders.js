@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get('/cart', cartController.getCart);
 
+router.get('/buynow', cartController.getBuyNow);
+
 router.get('/orders', cartController.getOrders);
 
 router.get('/cart/payments', cartController.getPayments);

@@ -32,6 +32,47 @@ body{
 }
 
 
+                          /* logout styles and positioning */
+.cover {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+
+.logout-form {
+  margin-top: 200px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  background-color: #ffd900;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-text {
+  font-size: 2rem;
+  padding: 5px;
+  text-align: center;
+}
+
+.logout-buttons {
+  margin: 10px;
+  width: 250px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.logout-buttons button {
+  width: 45%;
+
+}
+
                           /* carousel styles */
 .carousel-inner img {
   width: 100%;

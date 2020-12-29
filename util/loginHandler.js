@@ -1,18 +1,16 @@
 const userData = {
-  loggedin : false,
-  userEmail : ''
+  loggedin : true,
+  userEmail : 'swarajdas507@gmail.com'
 }
 
 exports.login = (email) => {
   userData.loggedin = true;
   userData.userEmail = email;
-  console.log('the user data loggin in',userData);
 }
 
 exports.logout = () => {
   userData.loggedin = false;
   userData.userEmail = '';
-  console.log('logout' , userData);
 }
 
 exports.getLoginState = () => {

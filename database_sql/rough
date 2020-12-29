@@ -1,0 +1,13 @@
+<% if(cartItems.length > 0) { %>
+          <h4>NO ITEMS IN CART</h4>
+        <% } else { %>
+          <% cartItems.forEach((item, index) => { %>
+            <li class="cart-item"> 
+              <div class="number"><%= index %></div>
+              <div class="product-name"><%= item. %></div>
+              <div class="price">63000</div>
+              <button class="btn btn-outline-primary">Buy Now</button>
+              <button class="btn btn-outline-danger">Remove</button>
+            </li>
+          <% }) %>
+        <% } >

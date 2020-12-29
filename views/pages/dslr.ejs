@@ -42,8 +42,12 @@
                 <div class="card-body">
                     <p class="card-title"><%= p.NAME %></p>
                     <p class="card-text">Price: ₹<%= p.PRICE %></p> 
-                    <a href="#" data-id='<%= p.PRODUCT_ID %>' class="btn btn-outline-secondary buy-now">Buy Now</a>
-                    <a href="#" data-id='<%= p.PRODUCT_ID %>' class="btn btn-outline-secondary add-to-cart">Add to Cart</a>
+                    <% if(p.STOCK > 0) { %>
+                      <button data-id='<%= p.PRODUCT_ID %>' class="btn btn-success buy-now">Buy Now</button>
+                    <% } else { %>
+                      <button data-id='<%= p.PRODUCT_ID %>' class="btn btn-outline-danger buy-now" disabled>Buy Now</button>
+                    <% } %>
+                    <button data-id='<%= p.PRODUCT_ID %>' class="btn btn-secondary add-to-cart">Add to Cart</button>
                 </div>
               </div>
             </div>

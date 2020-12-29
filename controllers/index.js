@@ -87,3 +87,13 @@ exports.postLogin = async (req, res, next) => {
       }
     });
 }
+
+exports.postLogout = (req, res, next) => {
+  loginHandler.logout();
+  const [name, email] = getUserName();
+
+  res.render('index', {
+    name : name,
+    email: email
+  });
+}
