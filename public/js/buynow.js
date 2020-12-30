@@ -11,13 +11,16 @@ const email = document.getElementById('email');
 
 function confirmOrders () {
   const purchaseIds = [];
+  const prodIds = [];
 
   moveToCartBtns.forEach(btn => {
     const purchaseId = btn.getAttribute('data-purchase-id');
     purchaseIds.push(purchaseId);
+    const prodId = btn.getAttribute('data-prodid');
+    prodIds.push(prodId);
   });
 
-  let data = {purchaseIds: purchaseIds};
+  let data = {purchaseIds: purchaseIds, prodIds: prodIds};
 
   fetch('http://localhost:3000/buynow/confirm-purchase', {
     method: 'POST',

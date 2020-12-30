@@ -43,14 +43,11 @@ exports.getCart = (req, res, next) => {
 exports.deleteFromCart = (req, res, next) => {
   const cartId = req.body.cartId;
 
-  console.log('delete from cart');
-  console.log('cid - ', cartId );
   cartbuydb.deleteFromCart(cartId)
     .then(() => {
       res.json({message: 'ok'});
     })
     .catch((err) => {
-      console.log(err);
       res.json({message: 'failed'});
     });
 }
@@ -95,7 +92,6 @@ exports.getBuyNow = (req, res, next) => {
 
 exports.deleteBuynowItem = (req, res, next) => {
   const purchaseId = req.body.purchaseId;
-  console.log('delete item purchase-id ',purchaseId);
 
   let message = '';
   cartbuydb.deleteBuyNowItem(purchaseId)
@@ -116,8 +112,6 @@ exports.moveToCart = async (req, res, next) => {
   const purchaseId = req.body.purchaseId;
   const prodId = req.body.prodId;
 
-  console.log('moving to cart', email, purchaseId, prodId);
-
   cartbuydb.deleteBuyNowItem(purchaseId);
 
   const result = await shopdb.addTOCart(email, prodId);
@@ -133,10 +127,10 @@ exports.moveToCart = async (req, res, next) => {
 
 exports.confirmOrders = (req, res, next) => {
   const purchaseIds = req.body.purchaseIds;
-  console.log(purchaseIds);
+  const prodIds = req.body.prodIds;
 
-  purchaseIds.forEach(id => {
-    cartbuydb.confirmOrder(id);
+  purchaseIds.forEach((id, index) => {
+    cartbuydb.confirmOrder(id, prodIds[index]);
   });
 
   res.json('all Done');
@@ -155,7 +149,6 @@ exports.getOrders = (req, res, next) => {
 
     cartbuydb.getConfirmedOders(email)
       .then(([orderItems]) => {
-        console.log(orderItems);
         res.render('pages/orders', {
           name : name,
           email: email,

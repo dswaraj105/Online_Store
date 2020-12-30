@@ -24,7 +24,7 @@ exports.deleteBuyNowItem = (purchaseId) => {
   return db.execute('DELETE FROM BUYNOW WHERE PURCHASE_ID=?', [purchaseId]);
 }
 
-exports.confirmOrder = (purchaseId) => {
+exports.confirmOrder = (purchaseId, prodID) => {
   const date = new Date();
 
   let d = date.getDate();
@@ -32,6 +32,8 @@ exports.confirmOrder = (purchaseId) => {
   let y = date.getFullYear();
 
   const today = y+'-'+m+'-'+d;
+
+  db.execute('update product set stock=stock-1 where product_id=?', [prodID]);
 
   return db.execute('UPDATE BUYNOW SET CONFIRMED=1, DATE=? WHERE PURCHASE_ID=?', [today, purchaseId]);
 }
