@@ -1,6 +1,7 @@
-const e = require('express');
 const cartbuydb = require('../models/cart_buydb');
+const shopdb = require('../models/shopdb');
 const loginHandler = require('../util/loginHandler');
+
 
 function getUser (){
   const email = loginHandler.getUserEmail();
@@ -39,6 +40,37 @@ exports.getCart = (req, res, next) => {
   }
 }
 
+exports.deleteFromCart = (req, res, next) => {
+  const cartId = req.body.cartId;
+
+  console.log('delete from cart');
+  console.log('cid - ', cartId );
+  cartbuydb.deleteFromCart(cartId)
+    .then(() => {
+      res.json({message: 'ok'});
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({message: 'failed'});
+    });
+}
+
+exports.moveToBuyNow = (req, res, next) => {
+  const productId = req.body.productId;
+  const cartId = req.body.cartId;
+  const email = req.body.email;
+
+  cartbuydb.deleteFromCart(cartId);
+  shopdb.buyNow(email, productId)
+    .then(() => {
+      res.json({message: 'ok'});
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({message: 'error'});
+    });
+}
+
 exports.getBuyNow = (req, res, next) => {
   const [name, email] =  getUser();
 
@@ -52,7 +84,6 @@ exports.getBuyNow = (req, res, next) => {
     cartbuydb.getBuyNowItems(email)
       .then((response) => {
         let buyNowItems = response[0];
-        console.log('buy now items', buyNowItems);
         res.render('pages/buynow', {
           name : name,
           email: email,
@@ -60,7 +91,55 @@ exports.getBuyNow = (req, res, next) => {
         });
       })
   }
+}
 
+exports.deleteBuynowItem = (req, res, next) => {
+  const purchaseId = req.body.purchaseId;
+  console.log('delete item purchase-id ',purchaseId);
+
+  let message = '';
+  cartbuydb.deleteBuyNowItem(purchaseId)
+    .then((result) => {
+      message = 'ok';
+      res.json({message: message});
+    })
+    .catch((err) => {
+      console.log(err);
+      message = 'failed';
+      res.json({message: message});
+    });
+
+}
+
+exports.moveToCart = async (req, res, next) => {
+  const email = req.body.email;
+  const purchaseId = req.body.purchaseId;
+  const prodId = req.body.prodId;
+
+  console.log('moving to cart', email, purchaseId, prodId);
+
+  cartbuydb.deleteBuyNowItem(purchaseId);
+
+  const result = await shopdb.addTOCart(email, prodId);
+  let message = '';
+  if(result) {
+    message = 'ok';
+  } else {
+    message = 'failed';
+  }
+
+  res.json({message: message});
+}
+
+exports.confirmOrders = (req, res, next) => {
+  const purchaseIds = req.body.purchaseIds;
+  console.log(purchaseIds);
+
+  purchaseIds.forEach(id => {
+    cartbuydb.confirmOrder(id);
+  });
+
+  res.json('all Done');
 }
 
 exports.getOrders = (req, res, next) => {
@@ -73,10 +152,20 @@ exports.getOrders = (req, res, next) => {
     });
 
   } else {
-    res.render('pages/orders', {
-      name : name,
-      email: email 
-    });
+
+    cartbuydb.getConfirmedOders(email)
+      .then(([orderItems]) => {
+        console.log(orderItems);
+        res.render('pages/orders', {
+          name : name,
+          email: email,
+          items:orderItems
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
   }
 
 }

@@ -93,4 +93,4 @@ addToCartBtns.forEach(cartBtn => {
 closeErrorBtn.addEventListener('click', () => {
   const errorElement = document.querySelector('.error-login');
   errorElement.classList.add('hide');
-})
+});

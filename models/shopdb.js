@@ -6,7 +6,7 @@ exports.getProducts = (catagory) => {
 
 exports.buyNow = async (email, prodid) => {
   const empid = Math.floor(Math.random()*4 +1);
-  let [item] = await db.execute('SELECT * FROM BUYNOW WHERE CUSTOMER=? AND PROD_ID=?', [email, prodid]);
+  let [item] = await db.execute('SELECT * FROM BUYNOW WHERE CUSTOMER=? AND PROD_ID=? AND CONFIRMED IS NULL', [email, prodid]);
   console.log(item);
   if(item.length > 0){
     return false;

@@ -250,6 +250,13 @@ hr.light-100 {
   background-color: 31595E;
 }
 
+
+.date-purchase {
+  width: 157px; 
+  height: 30px; 
+  overflow:  hidden;
+}
+
 /* ERROR STYLES */
 .error-login{
   background: #F00000;  /* fallback for old browsers */
