@@ -1,6 +1,6 @@
 const userData = {
-  loggedin : true,
-  userEmail : 'swarajdas507@gmail.com'
+  loggedin : false,
+  userEmail : ''
 }
 
 exports.login = (email) => {
