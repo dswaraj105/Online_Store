@@ -1,13 +1,52 @@
-<% if(cartItems.length > 0) { %>
-          <h4>NO ITEMS IN CART</h4>
-        <% } else { %>
-          <% cartItems.forEach((item, index) => { %>
-            <li class="cart-item"> 
-              <div class="number"><%= index %></div>
-              <div class="product-name"><%= item. %></div>
-              <div class="price">63000</div>
-              <button class="btn btn-outline-primary">Buy Now</button>
-              <button class="btn btn-outline-danger">Remove</button>
-            </li>
-          <% }) %>
-        <% } >
+1. Finding employee who has not delivered anything
+
+SELECT NAME 
+FROM EMPLOYEE
+WHERE E_ID NOT IN (
+  SELECT DISTINCT DELIVERY_EMPLOYEE FROM buynow
+);
+
+2. select customer who has purchased more than 5 products
+
+SELECT NAME 
+FROM CUSTOMER
+WHERE EMAIL IN (
+  SELECT B.CUSTOMER 
+  FROM BUYNOW B
+  GROUP BY (B.CUSTOMER)
+  HAVING COUNT(*) > 5
+);
+
+3. PRODUCT MOST SOLD IN JAN
+
+########################################## WRONG
+
+SELECT A.PROD_ID
+FROM BUYNOW A
+GROUP BY PROD_ID
+HAVING COUNT(PROD_ID) = (
+  SELECT MAX(MYCOUNT)
+  FROM (
+    SELECT COUNT(PROD_ID) MYCOUNT
+    FROM BUYNOW B
+    GROUP BY B.PROD_ID
+  )
+);
+
+4. CREATE A VIEW OF PRODUCTS WHOSE STOCK IS EMPTY
+
+CREATE VIEW EMPTY_PRODUCTS AS
+SELECT PRODUCT_ID, PRICE, CATAGORY
+FROM PRODUCT
+WHERE STOCK=0;
+
+5. FIND THE BEST SELLING PRODUCT
+
+SELECT B1.PROD_ID
+FROM BUYNOW B1
+GROUP BY PROD_ID
+HAVING COUNT(PROD_ID) = MAX (
+  SELECT COUNT(PROD_ID)
+  FROM BUYNOW
+  GROUP BY (PROD_ID)
+);
