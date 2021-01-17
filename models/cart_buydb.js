@@ -33,7 +33,7 @@ exports.confirmOrder = (purchaseId, prodID) => {
 
   const today = y+'-'+m+'-'+d;
 
-  db.execute('update product set stock=stock-1 where product_id=?', [prodID]);
+  db.execute('update product set stock=stock-1 where product_id=? AND STOCK>0', [prodID]);
 
   return db.execute('UPDATE BUYNOW SET CONFIRMED=1, DATE=? WHERE PURCHASE_ID=?', [today, purchaseId]);
 }

@@ -30,11 +30,17 @@ exports.postSignup = async (req, res, next) => {
   const password = req.body.password;
   const phone = req.body.phone;
   
-  await userdb.registerUser(name, email, password, phone);
-  
-  res.render('pages/address', {
-    email : email
-  });
+  let result = await userdb.registerUser(name, email, password, phone);
+
+  if(result == -1){
+    res.redirect('/signup/error');
+  } else {
+    loginHandler.login(email);
+    
+    res.render('pages/address', {
+      email : email
+    });
+  }
 }
 
 exports.getAddress = (req, res, next) => {
@@ -51,6 +57,12 @@ exports.postAddress = (req, res, next) => {
   userdb.updateUserAddress(email, state, city, pincode, houseno);
 
   res.redirect('/');
+}
+
+exports.errorSignup = (req, res, next) => {
+  res.render('pages/errorsignup', {
+    name : ''
+  });
 }
 
 exports.getLogin = (req, res, next) => {

@@ -14,6 +14,8 @@ router.get('/signup/address', indexController.getAddress);
 
 router.post('/signup/address', indexController.postAddress);
 
+router.get('/signup/error', indexController.errorSignup);
+
 router.get('/login', indexController.getLogin);
 
 router.post('/login', indexController.postLogin);
